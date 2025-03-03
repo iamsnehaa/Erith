@@ -1,16 +1,20 @@
-// This function clears all the values
+// Function to clear the display
 function clearScreen() {
     document.getElementById("result").value = "";
 }
- 
-// This function displays the values
+
+// Function to display the clicked values
 function display(value) {
     document.getElementById("result").value += value;
 }
- 
-// This function evaluates the expression and returns the result
+
+// Function to evaluate the expression safely
 function calculate() {
-    var p = document.getElementById("result").value;
-    var q = eval(p);
-    document.getElementById("result").value = q;
+    try {
+        let expression = document.getElementById("result").value;
+        let result = new Function('return ' + expression)();
+        document.getElementById("result").value = result;
+    } catch (error) {
+        document.getElementById("result").value = "Error";
+    }
 }
